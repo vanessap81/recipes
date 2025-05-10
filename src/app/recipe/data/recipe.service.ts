@@ -21,4 +21,16 @@ export class RecipeService {
       `${this.apiBaseUrl}/api/v1/recipes/${id}`,
     )
   }
+
+  // chamada à API passando parâmetro search 
+  public search(search: string): Observable<Recipe[]>{
+    return this.httpClient.get<Recipe[]>(
+      `${this.apiBaseUrl}/api/v1/recipes`,
+      {
+        params: {
+          search,
+        }
+      }
+    )
+  }
 }
