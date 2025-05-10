@@ -13,8 +13,9 @@ img {
     height: 240px;
     object-fit: cover;
     border-radius: calc(var(--space)/2);
+    transition: transform 0.5s;
 }
 
 img:hover {
-    filter: brightness(var(--brightness));
+    transform: scale(1.1);
 }
