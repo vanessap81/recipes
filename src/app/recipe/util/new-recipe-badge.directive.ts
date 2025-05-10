@@ -6,10 +6,11 @@ import { Directive, ElementRef, inject, input, OnInit, Renderer2 } from '@angula
 export class NewRecipeBadgeDirective implements OnInit {
   el = inject(ElementRef);
   renderer = inject(Renderer2);
-  new = input<boolean>();
+
+  appNewRecipeBadge = input<boolean>();
 
   ngOnInit(): void {
-    if(!this.new()) return;
+    if(!this.appNewRecipeBadge()) return;
 
     const badge = this.renderer.createElement('span');
     const text = this.renderer.createText('Nova!');
