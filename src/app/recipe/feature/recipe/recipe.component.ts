@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
 import { RecipeService } from '../../data/recipe.service';
 import { Observable } from 'rxjs';
 import { Recipe } from '../../data/recipe.model';
@@ -11,7 +11,13 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './recipe.component.html',
   styleUrl: './recipe.component.css'
 })
-export class RecipeComponent {
+export class RecipeComponent implements OnInit {
+  id = input<string>();
   recipeService = inject(RecipeService);
   recipe$!: Observable<Recipe>;
+
+  ngOnInit(): void {
+      const id = this.id();
+      if(id)this.recipe$ = this.recipeService.getById(id);
+  }
 }
