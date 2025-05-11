@@ -1,5 +1,5 @@
 .banner {
-    background: url('/banner.jpg')no-repeat center center;
+    background: url('../../../../../public/banner.png')no-repeat center center;
     background-size: cover;
     height: 480px;
     display: flex;
