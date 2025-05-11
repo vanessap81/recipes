@@ -1,7 +1,5 @@
 <app-banner
- [searchControl]="searchControl"
- [recipes]="filteredRecipes$ | async "
- (goToRecipeEvent)="goToRecipe($event)"
->
-
-</app-banner>
+    [searchControl]="searchControl"
+    [recipes]="filteredRecipes$ | async "
+    (goToRecipeEvent)="goToRecipe($event)"
+></app-banner>
