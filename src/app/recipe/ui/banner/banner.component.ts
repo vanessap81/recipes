@@ -1,6 +1,7 @@
-import { Component, ElementRef, inject, input, model, output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, ElementRef, HostListener, inject, input, model, output } from '@angular/core';
 import { Recipe } from '../../data/recipe.model';
+import { Router } from '@angular/router';
+import { RecipeService } from '../../data/recipe.service';
 
 @Component({
   selector: 'app-banner',
@@ -10,9 +11,29 @@ import { Recipe } from '../../data/recipe.model';
 })
 export class BannerComponent {
   elementRef = inject(ElementRef); 
+  router = inject(Router);
+  recipeService = inject(RecipeService);
+  recipes!: Recipe[] | null;
 
-  searchControl = input.required<FormControl>();
-  recipes = model<Recipe[] | null>();
-  goToRecipeEvent = output<string>();
+  OnEnterKey(event: KeyboardEvent): void {
+    const target = event.target as HTMLInputElement;
+    const value = target.value.toLowerCase();
+
+    if (event.key === 'Enter') {
+      this.recipeService.search(value).subscribe((data)=> {
+        this.recipes = data;
+      });
+    }
+  };
   
+  @HostListener('document:click', ['$event']) 
+  clickOut(event: MouseEvent): void { 
+      if (!this.elementRef.nativeElement.contains(event.target)) { 
+      this.recipes = null; 
+    }   
+  };
+  
+  goToRecipe(id: string) { 
+    this.router.navigate(['/receitas', id]);
+  }
 }
