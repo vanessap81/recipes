@@ -2,7 +2,6 @@ import { Component, ElementRef, HostListener, inject, input, model, OnInit, outp
 import { Recipe } from '../../data/recipe.model';
 import { Router } from '@angular/router';
 import { RecipeService } from '../../data/recipe.service';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-banner',
@@ -11,6 +10,8 @@ import { FormControl } from '@angular/forms';
   styleUrl: './banner.component.css'
 })
 export class BannerComponent {
+// TO DO: IMPLEMENTAR FORMCONTROL E OBSERVABLES NA REFATORAÇÃO
+
   elementRef = inject(ElementRef); 
   router = inject(Router);
   recipeService = inject(RecipeService);
@@ -18,7 +19,7 @@ export class BannerComponent {
 
   OnEnterKey(event: KeyboardEvent): void {
     const target = event.target as HTMLInputElement;
-    const value = target.value.toLowerCase();
+    let value = target.value.toLowerCase();
 
     if (event.key === 'Enter' && value.length > 2) {
       this.recipeService.search(value).subscribe((data)=> {
@@ -28,7 +29,7 @@ export class BannerComponent {
   };
   
   @HostListener('document:click', ['$event'])
-  clickOut(event: MouseEvent): void { 
+  clickOut(event: MouseEvent): void {
       if (!this.elementRef.nativeElement.contains(event.target)) { 
       this.recipeArray = [];
     }   
