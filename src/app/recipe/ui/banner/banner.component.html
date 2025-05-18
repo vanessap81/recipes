@@ -3,16 +3,17 @@
     <div class="search">
         <input 
             type="text"
-            placeholder="Digite o termo e aperte enter para buscar"
+            placeholder="Procurar receitas ou ingredientes"
             (keydown)="OnEnterKey($event)"
         >
-    @if(recipes; as recipes){
+
+    @if(recipeArray.length > 0){
         <div class="search-result">
-            @for(recipe of recipes ; track recipe.id){
-                <a (click)='goToRecipe(recipe.id)'>{{ recipe.name }}</a>
+            @for (recipe of recipeArray; track recipe.id){
+                <a (click)="goToRecipe(recipe.id)">{{ recipe.name }}</a>
             }
         </div>
-    }    
+    }
     </div>
 
     
